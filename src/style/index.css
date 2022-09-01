@@ -1,0 +1,62 @@
+html,
+body {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Montserrat', 'Roboto';
+	height: 100vh;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+	padding: 0;
+}
+
+#root {
+	height: 100vh;
+	display: flex;
+}
+
+.App {
+	height: 100%;
+	flex: 1;
+}
+
+.title {
+	text-transform: uppercase;
+	color: var(--black30);
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 2px;
+}
+
+.stat {
+	color: var(--orange);
+	font-weight: 700;
+	font-size: 0.7rem;
+}
+
+:root {
+	/* color */
+	--orange: #f2753b;
+	--orange-light: #ebad65;
+	--black30: #00000030;
+
+	/* shadow */
+	--shadow-light: 0px 0px 19px 0px rgba(3, 3, 3, 0.15);
+}
