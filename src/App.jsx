@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Cards from '../components/Cards';
-import SearchBar from '../components/SearchBar';
-import bg from '../assets/home-bg.jpg';
-import Details from './details';
+import Cards from './components/Cards';
+import SearchBar from './components/SearchBar';
+import Details from './components/Details';
+import bg from './assets/home-bg.jpg';
 
-const Home = () => {
+const App = () => {
 	const [players, setPlayers] = useState();
 	const [selectedPlayer, setSelectedPlayer] = useState();
 	const [filteredPlayers, setFilteredPlayers] = useState();
 	const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 	const [inputSearch, setInputSearch] = useState('');
+	const [isLoading, setIsLoading] = useState(true);
 
 	//handle open players details
 	const handleOpenCard = id => {
 		setIsDetailsOpen(true);
 		setSelectedPlayer(players?.find(player => player.id === id));
+		setInputSearch('');
+		searchPlayer('');
 	};
 
 	//handle close players details
@@ -41,16 +44,14 @@ const Home = () => {
 
 	//fetch players data from api
 	useEffect(() => {
-		fetch('https://data.latelier.co/training/tennis_stats/headtohead.json')
-			.then(res => {
-				return res.json();
-			})
-			.then(data => {
-				setPlayers(data.players);
-			})
-			.catch(err => {
-				console.log(err);
-			});
+		const fetchData = async () => {
+			setIsLoading(true);
+			const res = await fetch('https://data.latelier.co/training/tennis_stats/headtohead.json');
+			const { players } = await res.json();
+			setPlayers(players);
+			setIsLoading(false);
+		};
+		fetchData();
 	}, []);
 
 	//filters players data by input search
@@ -59,7 +60,7 @@ const Home = () => {
 	}, [inputSearch]);
 
 	return (
-		<StyledHome>
+		<StyledApp data-testid="main">
 			{isDetailsOpen ? (
 				<Details handleCloseCard={handleCloseCard} player={selectedPlayer} />
 			) : (
@@ -68,37 +69,49 @@ const Home = () => {
 					<Cards
 						players={inputSearch ? filteredPlayers : players}
 						handleOpenCard={handleOpenCard}
+						isLoading={isLoading}
 					/>
 				</section>
 			)}
-		</StyledHome>
+		</StyledApp>
 	);
 };
 
-const StyledHome = styled.main`
-	background-image: url(${bg});
+const StyledApp = styled.main`
+	/* background-image: url(${bg});
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
-	height: 100%;
+	background-attachment: fixed, scroll; */
 	width: 100%;
-	padding: 6% 10% 0;
-	position: relative;
+	/*
+	position: fixed;
+	bottom: 0; */
+	height: 100%;
+	/* overflow: auto;
+	overscroll-behavior-y: contain; */
+
 	@media (max-width: 900px) {
 		display: flex;
 		justify-content: center;
+		padding: 0;
+		margin: auto;
 	}
 	section {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		gap: 2.6rem;
-		width: 40%;
+		gap: 2.6rem 0;
+		width: 28rem;
 		height: 100%;
+		padding-top: 1.5rem;
+		padding-left: 10%;
 		@media (max-width: 900px) {
-			width: 90%;
+			max-width: 35rem;
+			align-items: center;
+			margin: 2rem;
+			padding-left: 0;
 		}
 	}
 `;
 
-export default Home;
+export default App;

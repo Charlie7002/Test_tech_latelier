@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const card = ({ player, handleOpenCard }) => {
 	return (
-		<StyledCard onClick={() => handleOpenCard(player.id)}>
+		<StyledCard onClick={() => handleOpenCard(player.id)} data-testid="cardItem">
 			<div className="card_image">
 				<img src={player?.picture} alt={player?.firstname} />
 			</div>
@@ -30,10 +30,9 @@ const card = ({ player, handleOpenCard }) => {
 	);
 };
 
-const StyledCard = styled.div`
-	height: 7.7rem;
+const StyledCard = styled.article`
+	height: 8.4rem;
 	width: 100%;
-	max-width: 28rem;
 	background-color: white;
 	display: flex;
 	position: relative;
@@ -45,18 +44,18 @@ const StyledCard = styled.div`
 		width: 15%;
 		position: absolute;
 		top: 65%;
-		left: 8%;
+		left: 11%;
 		img {
 			object-fit: contain;
 			height: 100%;
 			width: 100%;
-			transform: scale(2.4);
+			transform: scale(2.9) translateY(5%);
 		}
 	}
 	.card_content {
 		height: 100%;
 		width: 100%;
-		gap: 15%;
+		gap: 17%;
 		margin-left: 38%;
 		display: flex;
 		flex-direction: column;
@@ -64,7 +63,7 @@ const StyledCard = styled.div`
 		font-size: 0.65rem;
 		h3 {
 			color: var(--orange);
-			font-size: 0.9rem;
+			font-size: 1rem;
 		}
 		&_stat {
 			display: flex;

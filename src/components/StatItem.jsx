@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StatItem = ({ title, stat }) => {
 	return (
-		<StyledStatItem>
+		<StyledStatItem data-testid="statItem">
 			<span className="title">{title}</span>
 			<span className="stat">{stat}</span>
 		</StyledStatItem>

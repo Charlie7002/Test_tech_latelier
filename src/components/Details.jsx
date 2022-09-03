@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import StatItem from '../components/StatItem';
+import StatItem from './StatItem';
 
 const Details = ({ handleCloseCard, player }) => {
 	return (
@@ -17,7 +17,11 @@ const Details = ({ handleCloseCard, player }) => {
 							<h4 className="detail-top--name_lastname">{player.lastname}</h4>
 						</div>
 						<div className="detail-top--country">
-							<img src={player.country.picture} className="detail-top--country_flag" />
+							<img
+								src={player.country.picture}
+								alt={player.country.code}
+								className="detail-top--country_flag"
+							/>
 							<h6 className="detail-top--country_code">{player.country.code}</h6>
 						</div>
 					</div>
@@ -80,6 +84,7 @@ const StyledDetails = styled.div`
 	flex: 1;
 	height: 100%;
 	width: 100%;
+	position: absolute;
 	flex-direction: flex-end;
 	.detail-container {
 		z-index: 2;
@@ -89,13 +94,9 @@ const StyledDetails = styled.div`
 		display: flex;
 		flex-direction: column;
 		position: relative;
-		bottom: 0;
-		max-width: 1160px;
+		max-width: 1000px;
 		@media (max-width: 700px) {
-			margin: 38% auto 0;
-		}
-		@media (max-width: 650px) {
-			margin: 89% auto 0;
+			margin: 38% 4% 0;
 		}
 	}
 	.detail-close {
@@ -116,7 +117,10 @@ const StyledDetails = styled.div`
 		position: absolute;
 		bottom: 0;
 		left: -11%;
-		height: 600px;
+		height: 550px;
+		max-width: 350px;
+		overflow-y: hidden;
+		padding: 2rem 2rem 0;
 		@media (max-width: 910px) {
 			max-height: 500px;
 		}
@@ -125,7 +129,8 @@ const StyledDetails = styled.div`
 		}
 		img {
 			height: 100%;
-			z-index: 3;
+			width: 100%;
+			object-fit: cover;
 			filter: drop-shadow(5px 2px 26px rgba(0, 0, 0, 0.45));
 		}
 	}
@@ -190,6 +195,9 @@ const StyledDetails = styled.div`
 		display: flex;
 		position: relative;
 		height: 100%;
+		@media (max-width: 500px) {
+			margin-top: 10%;
+		}
 	}
 	.detail-bottom--stat {
 		display: flex;
@@ -206,10 +214,10 @@ const StyledDetails = styled.div`
 			gap: 15% 0;
 			margin-left: 34%;
 		}
-		@media (max-width: 910px) {
+		@media (max-width: 700px) {
 			flex-wrap: nowrap;
 			gap: 0;
-			margin-left: 48%;
+			align-items: center;
 		}
 		@media (max-width: 700px) {
 			margin-left: 4%;
