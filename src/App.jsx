@@ -54,7 +54,7 @@ const App = () => {
 		fetchData();
 	}, []);
 
-	//filters players data by input search
+	//set filtered players data
 	useEffect(() => {
 		searchPlayer(inputSearch);
 	}, [inputSearch]);
@@ -78,19 +78,8 @@ const App = () => {
 };
 
 const StyledApp = styled.main`
-	/* background-image: url(${bg});
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-attachment: fixed, scroll; */
 	width: 100%;
-	/*
-	position: fixed;
-	bottom: 0; */
 	height: 100%;
-	/* overflow: auto;
-	overscroll-behavior-y: contain; */
-
 	@media (max-width: 900px) {
 		display: flex;
 		justify-content: center;

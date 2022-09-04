@@ -4,11 +4,11 @@ import StatItem from './StatItem';
 const Details = ({ handleCloseCard, player }) => {
 	return (
 		<>
-			<StyledOverlay />
-			<StyledDetails>
+			<StyledOverlay data-testid="overlay" />
+			<StyledDetails data-testid="detail">
 				<div className="detail-container">
 					<div className="detail-close" onClick={handleCloseCard}>
-						<span>X</span>
+						<span data-testid="closeBtn">X</span>
 					</div>
 
 					<div className="detail-top">
@@ -116,7 +116,7 @@ const StyledDetails = styled.div`
 	.detail-image {
 		position: absolute;
 		bottom: 0;
-		left: -11%;
+		left: -17%;
 		height: 550px;
 		max-width: 350px;
 		overflow-y: hidden;
