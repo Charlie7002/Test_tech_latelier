@@ -34,9 +34,4 @@ describe('render Details', () => {
 		const closeBtn = screen.getByTestId('closeBtn');
 		expect(closeBtn).toBeInTheDocument();
 	});
-	test('overlay should be rendered', () => {
-		render(<Details player={player} />);
-		const overlay = screen.getByTestId('overlay');
-		expect(overlay).toBeInTheDocument();
-	});
 });

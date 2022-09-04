@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Cards from './components/Cards';
 import SearchBar from './components/SearchBar';
-import Details from './components/Details';
-import bg from './assets/home-bg.jpg';
+import Details from './page/Details';
 
 const App = () => {
 	const [players, setPlayers] = useState();
@@ -14,9 +13,9 @@ const App = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	//handle open players details
-	const handleOpenCard = id => {
+	const handleOpenCard = (id) => {
 		setIsDetailsOpen(true);
-		setSelectedPlayer(players?.find(player => player.id === id));
+		setSelectedPlayer(players?.find((player) => player.id === id));
 		setInputSearch('');
 		searchPlayer('');
 	};
@@ -27,17 +26,13 @@ const App = () => {
 	};
 
 	//handles input search
-	const handleSearch = e => {
+	const handleSearch = (e) => {
 		setInputSearch(e.target.value);
 	};
 
 	//filters players data by input search first name or last name
-	const searchPlayer = inputSearch => {
-		const filteredPlayer = players?.filter(
-			player =>
-				player.firstname.toLowerCase().includes(inputSearch.toLowerCase()) ||
-				player.lastname.toLowerCase().includes(inputSearch.toLowerCase()),
-		);
+	const searchPlayer = (inputSearch) => {
+		const filteredPlayer = players?.filter((player) => player.firstname.toLowerCase().includes(inputSearch.toLowerCase()) || player.lastname.toLowerCase().includes(inputSearch.toLowerCase()));
 
 		setFilteredPlayers(filteredPlayer);
 	};
@@ -60,20 +55,18 @@ const App = () => {
 	}, [inputSearch]);
 
 	return (
-		<StyledApp data-testid="main">
+		<>
 			{isDetailsOpen ? (
 				<Details handleCloseCard={handleCloseCard} player={selectedPlayer} />
 			) : (
-				<section>
-					<SearchBar inputSearch={inputSearch} handleSearch={handleSearch} />
-					<Cards
-						players={inputSearch ? filteredPlayers : players}
-						handleOpenCard={handleOpenCard}
-						isLoading={isLoading}
-					/>
-				</section>
+				<StyledApp data-testid="main">
+					<section>
+						<SearchBar inputSearch={inputSearch} handleSearch={handleSearch} />
+						<Cards players={inputSearch ? filteredPlayers : players} handleOpenCard={handleOpenCard} isLoading={isLoading} />
+					</section>
+				</StyledApp>
 			)}
-		</StyledApp>
+		</>
 	);
 };
 
